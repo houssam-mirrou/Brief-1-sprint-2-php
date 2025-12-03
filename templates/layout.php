@@ -8,7 +8,7 @@ echo '<main class="flex-1">';
 
 function valider_name($name)
 {
-    if($name === null){
+    if ($name === null) {
         return false;
     }
     $regex = "/^[A-Za-z]{3,}$/";
@@ -19,14 +19,14 @@ function valider_name($name)
 }
 function valider_email($email)
 {
-    if($email === null){
+    if ($email === null) {
         return false;
     }
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 function valider_description($description)
 {
-    if($description === null){
+    if ($description === null) {
         return false;
     }
     $regex = "/^.{20,}$/s";
@@ -129,41 +129,47 @@ switch ($page_name) {
         <section class="container mx-auto py-16">
             <h2 class="text-3xl font-bold mb-6 text-center">Contactez-nous</h2>
             <form class="max-w-xl mx-auto bg-white p-8 shadow-md rounded-lg space-y-4" method="post">
-            <input type="text" placeholder="Votre nom" class="w-full border px-4 py-2 rounded-lg username" name="username" value= <?= $tableaux["username"] ?>>
-            <?php
-                if (!valider_name($tableaux['username']) && $tableaux['username']!== null) {
+                <input type="text" placeholder="Votre nom" class="w-full border px-4 py-2 rounded-lg username" name="username" value=<?= $tableaux["username"] ?>>
+                <?php
+                if (!valider_name($tableaux['username']) && $tableaux['username'] !== null) {
                     echo "<h2 class= 'text-xl text-[red]'>Tu doit ecrire plus de deux carachter</h2>";
                 }
 
-            ?>
-            <input type="email" placeholder="Votre email" class="w-full border px-4 py-2 rounded-lg email" name="email" value= <?= $tableaux["email"] ?>>
-            <?php
-            if (!valider_email($tableaux['email']) && $tableaux['email']!== null) {
-                echo "<h2 class= 'text-xl text-[red]'>Tu doit ecrire un email valide</h2>";
-            }
-            ?>
-            <textarea placeholder="Votre message" class="w-full border px-4 py-2 rounded-lg description" name="description"><?php echo $tableaux["description"] ?></textarea>
-            <?php
-            if (!valider_description($tableaux['description']) && $tableaux['description']!== null) {
-                echo "<h2 class= 'text-xl text-[red]'>Tu doit ecrire une description plus que 20 charachter</h2>";
-            }
-            ?>
-            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700" name="password">Envoyer</button>
+                ?>
+                <input type="email" placeholder="Votre email" class="w-full border px-4 py-2 rounded-lg email" name="email" value=<?= $tableaux["email"] ?>>
+                <?php
+                if (!valider_email($tableaux['email']) && $tableaux['email'] !== null) {
+                    echo "<h2 class= 'text-xl text-[red]'>Tu doit ecrire un email valide</h2>";
+                }
+                ?>
+                <textarea placeholder="Votre message" class="w-full border px-4 py-2 rounded-lg description" name="description"><?php echo $tableaux["description"] ?></textarea>
+                <?php
+                if (!valider_description($tableaux['description']) && $tableaux['description'] !== null) {
+                    echo "<h2 class= 'text-xl text-[red]'>Tu doit ecrire une description plus que 20 charachter</h2>";
+                }
+                ?>
+                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700" name="password">Envoyer</button>
             </form>
         </section>'
 <?php
+        $config = require('classes/config.php');
+        $data = new Database($config['database']);
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $username = $_POST["username"];
             $email = $_POST["email"];
             $description = $_POST["description"];
             if (valider_les_champ($username, $email, $description) === true) {
-                //ajouter un commenter dans le database;
-            } else {
+                //ajouter un commentair dans le database;
+                $query = 'insert into comments (name, email, descrip) 
+                            values (:name,:email,:descrip)';
+                $param = [
+                    ':name' => $username,
+                    ':email' => $email,
+                    ':descrip' => $description
+                ];
+                $data->query($query, $param);
             }
         }
-
-
-        $data = new Database();
         $comments = $data->query('select * from comments');
 
         echo '<div class = "grid grid-cols-3">';
