@@ -8,7 +8,10 @@ echo '<main class="flex-1">';
 
 function valider_name($name){
     $regex = "/^[A-Za-z]{3,}$/";
-    
+    if(preg_match($name,$regex)){
+        return true;
+    }
+    return false;
 }
 function valider_email($email){
     $regex = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/";
