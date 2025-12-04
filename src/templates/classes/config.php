@@ -2,9 +2,9 @@
 
 return $config = [
     'database' => [
-        'host' => 'localhost',
+        'host' => 'db',
         'port' => 3306,
-        'dbname' => 'myapp',
+        'dbname' => 'mydb',
         'charset' => 'utf8mb4'
     ]
 ];

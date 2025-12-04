@@ -1,5 +1,5 @@
 <?php
-require '/home/houssam/websites/brief-1/templates/header.php';
+require __DIR__ . '/../templates/header.php';
 
 echo '<main class="flex-1">';
 
@@ -10,5 +10,5 @@ echo '<section class="container mx-auto py-20 text-center h-full">
     
 echo '</main>';
 
-require '/home/houssam/websites/brief-1/templates/footer.php';
+require __DIR__ . '/../templates/footer.php';
 
