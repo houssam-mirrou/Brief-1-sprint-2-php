@@ -15,9 +15,9 @@
         <h1 class="text-2xl font-bold text-blue-600">DigitalWave</h1>
         <ul class="flex space-x-6">
             <li><a href="/" class="<?= isUrl('/index') || isUrl('/') ? 'text-blue-600 font-medium' : 'hover:text-blue-600' ?>">Accueil</a></li>
-            <li><a href="services" class="<?= isUrl('/services') ? 'text-blue-600 font-medium' : 'hover:text-blue-600' ?>">Services</a></li>
-            <li><a href="about" class="<?= isUrl('/about') ? 'text-blue-600 font-medium' : 'hover:text-blue-600' ?>">À propos</a></li>
-            <li><a href="contact" class="<?= isUrl('/contact') ? 'text-blue-600 font-medium' : 'hover:text-blue-600' ?>">Contact</a></li>
+            <li><a href="/services" class="<?= isUrl('/services') ? 'text-blue-600 font-medium' : 'hover:text-blue-600' ?>">Services</a></li>
+            <li><a href="/propos" class="<?= isUrl('/propos') ? 'text-blue-600 font-medium' : 'hover:text-blue-600' ?>">À propos</a></li>
+            <li><a href="/contact" class="<?= isUrl('/contact') ? 'text-blue-600 font-medium' : 'hover:text-blue-600' ?>">Contact</a></li>
         </ul>
     </nav>
 </header>

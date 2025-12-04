@@ -1,8 +1,9 @@
 <?php
 $page_name = parse_url($_SERVER['REQUEST_URI'])['path'];
-require 'classes/Database.php';
-require 'classes/Comment.php';
+require __DIR__ . '/classes/Database.php';
+require __DIR__ . '/classes/Comment.php';
 
+$config = require __DIR__ . '/classes/config.php';
 
 echo '<main class="flex-1">';
 
@@ -79,7 +80,7 @@ switch ($page_name) {
                     services</a>
             </section>';
         break;
-    case '/about':
+    case '/propos':
         echo '<section class="container mx-auto py-16">
             <h2 class="text-3xl font-bold mb-6 text-center">À propos de nous</h2>
             <p class="text-gray-700 text-lg leading-8 text-center max-w-3xl mx-auto">
@@ -152,7 +153,6 @@ switch ($page_name) {
             </form>
         </section>'
 <?php
-        $config = require('classes/config.php');
         $data = new Database($config['database']);
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $username = $_POST["username"];
