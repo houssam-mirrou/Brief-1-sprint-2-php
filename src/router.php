@@ -1,15 +1,12 @@
-<?php 
+<?php
 
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-
 $routes = [
-    '/' => 'controllers/index.php',
-    '/about' => 'controllers/about.php',
-    '/contact' => 'controllers/contact.php',
-    '/services' => 'controllers/services.php'
+    '/' =>  __DIR__ .'/controllers/index.php',
+    '/propos' => __DIR__ . '/controllers/propos.php',
+    '/contact' => __DIR__ . '/controllers/contact.php',
+    '/services' => __DIR__ . '/controllers/services.php'
 ];
-
-
 
 function route_to_controller($uri, $routes)
 {
@@ -27,4 +24,4 @@ function abort($code = 404)
     die();
 }
 
-route_to_controller($uri,$routes);
+route_to_controller($uri, $routes);
